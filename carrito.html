@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Carrito</title>
+   <link rel="icon" href="imagenes/logo 2.0.png" type="image/png">
+  <link rel="stylesheet" href="estilo.css" />
+  <style>
+    .carrito {
+      padding: 50px 10%;
+      text-align: center;
+    }
+    .carrito h2 {
+      font-size: 2rem;
+      color: #0a4ea1;
+      margin-bottom: 30px;
+    }
+    .lista-carrito {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      justify-items: center;
+    }
+    .producto-carrito {
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      max-width: 260px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .producto-carrito:hover { transform: translateY(-5px); }
+    .producto-carrito img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .producto-carrito h3 { color: #0d2c54; margin-bottom: 5px; }
+    .producto-carrito p { color: #333; margin-bottom: 8px; }
+
+    .botones-cantidad {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    .btn-cantidad, .btn-eliminar {
+      background-color: #0a4ea1;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+    .btn-cantidad:hover { background-color: #ffde59; color: #0a4ea1; }
+    .btn-eliminar { background-color: #ff6b6b; }
+    .btn-eliminar:hover { background-color: #e63946; }
+
+    .resumen {
+      margin-top: 40px;
+      font-size: 1.3rem;
+      color: #0d2c54;
+    }
+
+    .btn-vaciar {
+      background-color: #0a4ea1;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-top: 15px;
+      display: inline-block;
+    }
+    .btn-vaciar:hover {
+      background-color: #ffde59;
+      color: #0a4ea1;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">
+        <img src="imagenes/logo.jpeg" alt="Logo">
+        <h1>Accesorios de Amor</h1>
+      </div>
+      <!-- Agregar botón de menú -->
+      <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="catalogo.html">Catálogo</a></li>
+          <li><a href="index.html#promociones">Promociones</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="carrito">
+    <h2>🛍️ Tu Carrito de Compras</h2>
+    <div class="lista-carrito" id="lista-carrito"></div>
+    <div class="resumen" id="resumen"></div>
+    <button class="btn-vaciar" id="vaciar-carrito">Vaciar carrito</button>
+  </section>
+  <button id="btn-whatsapp" class="btn-whatsapp">
+  📦 Enviar pedido
+</button>
+
+<br><br><br>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const lista = document.getElementById("lista-carrito");
+    const resumen = document.getElementById("resumen");
+    const contador = document.getElementById("contador-carrito");
+    const btnVaciar = document.getElementById("vaciar-carrito");
+
+    function actualizarContador() {
+      const total = carrito.reduce((acc, p) => acc + p.cantidad, 0);
+      contador.textContent = total;
+    }
+
+    function renderCarrito() {
+      if (carrito.length === 0) {
+        lista.innerHTML = "<p>Tu carrito está vacío 🛒</p>";
+        resumen.textContent = "";
+        actualizarContador();
+        return;
+      }
+
+      lista.innerHTML = carrito.map((item, index) => `
+        <div class="producto-carrito">
+          <img src="${item.imagen}" alt="${item.nombre}">
+          <h3>${item.nombre}</h3>
+          <p>Precio: $${item.precio.toLocaleString()}</p>
+          <div class="botones-cantidad">
+            <button class="btn-cantidad" data-index="${index}" data-action="restar">–</button>
+            <span>${item.cantidad}</span>
+            <button class="btn-cantidad" data-index="${index}" data-action="sumar">+</button>
+          </div>
+          <p>Subtotal: $${(item.precio * item.cantidad).toLocaleString()}</p>
+          <button class="btn-eliminar" data-index="${index}">Eliminar</button>
+        </div>
+      `).join("");
+
+      const total = carrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
+      resumen.innerHTML = `<h3>Total a pagar: $${total.toLocaleString()}</h3>`;
+      actualizarContador();
+
+      // 🎯 Eventos botones
+      document.querySelectorAll(".btn-cantidad").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          const index = e.target.dataset.index;
+          const action = e.target.dataset.action;
+          if (action === "sumar") carrito[index].cantidad++;
+          else if (action === "restar" && carrito[index].cantidad > 1) carrito[index].cantidad--;
+          localStorage.setItem("carrito", JSON.stringify(carrito));
+          renderCarrito();
+        });
+      });
+
+      document.querySelectorAll(".btn-eliminar").forEach(btn => {
+        btn.addEventListener("click", e => {
+          const index = e.target.dataset.index;
+          carrito.splice(index, 1);
+          localStorage.setItem("carrito", JSON.stringify(carrito));
+          renderCarrito();
+        });
+      });
+    }
+
+    btnVaciar.addEventListener("click", () => {
+      if (confirm("¿Deseas vaciar todo el carrito?")) {
+        carrito = [];
+        localStorage.removeItem("carrito");
+        renderCarrito();
+      }
+    });
+
+    renderCarrito();
+  });
+
+  // WhatsApp Integration
+  document.addEventListener("DOMContentLoaded", () => {
+    const botonWpp = document.getElementById("btn-whatsapp");
+    
+    if (botonWpp) {
+        botonWpp.addEventListener("click", () => {
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+            if (carrito.length === 0) {
+                alert("Tu carrito está vacío ❌");
+                return;
+            }
+
+            let mensaje = "🛍️ Nuevo pedido - Accesorios de Amor%0A";
+            mensaje += "---------------------------------%0A";
+
+            carrito.forEach(p => {
+                mensaje += `${p.cantidad}x ${p.nombre} - $${p.precio}%0A`;
+            });
+
+            let total = carrito.reduce((acc, p) => acc + (p.precio * p.cantidad), 0);
+            mensaje += "---------------------------------%0A";
+            mensaje += `Total: $${total}%0A%0A`;
+            mensaje += "📍 Entrega: ____%0A";
+            mensaje += "👤 Cliente: ____";
+
+            const url = `https://wa.me/573239003143?text=${mensaje}`;
+            window.open(url, "_blank");
+
+             // ✅ Limpiar carrito después de enviar
+              localStorage.removeItem("carrito");
+    
+    
+             // ✅ Redirigir a WhatsApp
+              window.open(url, "_blank");
+
+             // ✅ Recargar para actualizar el contador y lista
+              setTimeout(() => location.reload(), 500);
+        });
+    }
+});
+  </script>
+
+   <script src="js/menu.js"></script>
+</body>
+</html>

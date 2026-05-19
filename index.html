@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accesorios de Amor</title>
+
+    <link rel="icon" href="imagenes/logo 2.0.png" type="image/png">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- TU CSS -->
+    <link rel="stylesheet" href="estilo.css">
+
+    <style>
+
+    /* 🔥 BOTONES FLOTANTES CORREGIDOS */
+   /* ===== BOTONES FLOTANTES ===== */
+
+/* BOTÓN CHAT (arriba) */
+#chatButton {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    background: #6cb5b5;
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+/* BOTÓN WHATSAPP (abajo) */
+#whatsappButton {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    background: #25D366;
+    color: white;
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+/* HOVER EFECTO */
+#chatButton:hover {
+    transform: scale(1.1);
+}
+
+#whatsappButton:hover {
+    transform: scale(1.1);
+}
+
+/* ===== CHAT BOX ===== */
+#chatBox {
+    display: none;
+    position: fixed;
+    bottom: 170px;
+    right: 20px;
+    width: 270px;
+    height: 330px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    overflow: hidden;
+    z-index: 1000;
+}
+
+/* HEADER CHAT */
+#chatHeader {
+    background: #6cb5b5;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* MENSAJES */
+#chatMessages {
+    height: 220px;
+    overflow-y: auto;
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* INPUT */
+#chatInput {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #ccc;
+    padding: 10px;
+    outline: none;
+}
+    </style>
+</head>
+
+<body>
+
+
+
+  <!-- ENCABEZADO -->
+  <header class="navbar">
+  <div class="container">
+    <!-- LOGO -->
+    <div class="logo">
+      <img src="imagenes/logo.jpeg" alt="Logo">
+      <h1>Accesorios de Amor</h1>
+    </div>
+    
+
+    <!-- BOTÓN HAMBURGUESA (solo en móvil) -->
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- MENÚ -->
+    <nav class="menu" id="menu">
+      <ul>
+        <li><a href="#index">Inicio</a></li>
+        <li><a href="#promociones">Promociones</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="catalogo.html">Catálogo</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+
+        <!-- 🛒 CARRITO CON CONTADOR -->
+        <li>
+          <a href="carrito.html" class="carrito-link">
+            🛒 <span id="contador-carrito">0</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="container">
+
+    <!-- Sección principal -->
+    <section class="my-5 text-center">
+      <div class="p-4 bg-light rounded-3 shadow-sm">
+        <h1>✨ Bienvenidos a <strong>Accesorios de Amor</strong></h1>
+        <p class="texto-justificado">
+          En <strong>Accesorios de Amor</strong> encontrarás piezas únicas hechas a mano con amor y detalle.
+          Nuestros collares, manillas, aretes y anillos están diseñados para resaltar tu estilo
+          con elegancia y autenticidad. 💍<br><br>
+          LA GRANDEZA NO ES LO QUE TIENES, SINO LO QUE DAS.
+        </p>
+      </div>
+    </section>
+
+<!--aqui pones las fotos donde haz ido a ferias-->
+<!-- GALERÍA / CARRUSEL AUTOMÁTICO -->
+<section id="galeria" class="my-5 text-center">
+  <h2 class="mb-4">✨ Nuestra Galería ✨</h2>
+ <div id="carouselAccesorios" class="carousel slide shadow-sm mx-auto" 
+     data-bs-ride="carousel" 
+     data-bs-interval="3000" 
+     data-bs-pause="false"
+     style="max-width: 1500px; border-radius: 20px; overflow: hidden;">
+
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="imagenes/feria 1.jpeg" class="d-block w-100" alt="Feria artesanal">
+      </div>
+      <div class="carousel-item">
+        <img src="imagenes/feria 2.jpeg" class="d-block w-100" alt="Exposición de joyas">
+      </div>
+      <div class="carousel-item">
+        <img src="imagenes/feria 3.jpeg"class="d-block w-100" alt="Accesorios en exhibición">
+      </div>
+      <div class="carousel-item">
+        <img src="imagenes/feria 4.jpeg" class="d-block w-100" alt="Accesorios">
+      </div>
+      <div class="carousel-item">
+        <img src="imagenes/feria 7.jpeg" class="d-block w-100" alt="En exhibición">
+      </div>
+      <div class="carousel-item">
+        <img src="imagenes/feria 6.jpeg" class="d-block w-100" alt="Exhibición">
+      </div>
+    </div>
+
+    <!-- Controles (opcionales, se pueden quitar si quieres que sea solo automático) -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselAccesorios" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselAccesorios" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+</section>
+
+
+    <!-- PRODUCTOS -->
+    <section id="productos" class="my-5">
+      <h2 class="mb-4 text-center">Nuestros Productos</h2>
+      <div class="row g-4">
+
+<!--aqui van los nuevos productos-->
+        <!-- Producto 1 -->
+        <div class="col-md-4">
+          <div class="card shadow-sm">
+            <img src="imagenes/Catalogo/productos nuevos/llavero gloss $14.000.jpg" class="poster" alt="Llavero Gloss">
+            <div class="card-body text-center">
+              <h5 class="card-title">Llavero Gloss</h5>
+                <p class="fw-bold text-primary">$14.000</p>
+              <center><button class="btn-agregar"
+        data-nombre="Llavero Gloss"
+        data-precio="14000"
+        data-imagen="imagenes/Catalogo/productos nuevos/llavero gloss $14.000.jpg">
+        Agregar al carrito
+      </button></center> 
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="col-md-4">
+          <div class="card shadow-sm">
+            <img src="imagenes/Catalogo/productos nuevos/llavero mini consola $15.000.jpg" class="poster" alt="Llavero Mini Consola">
+            <div class="card-body text-center">
+              <h5 class="card-title">Llavero Mini Consola</h5>
+                <p class="fw-bold text-primary">$15.000</p>
+              <center><button class="btn-agregar"
+        data-nombre="Llavero Mini Consola"
+        data-precio="15000"
+        data-imagen="imagenes/Catalogo/productos nuevos/llavero mini consola $15.000.jpg">
+        Agregar al carrito
+      </button></center> 
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="col-md-4">
+          <div class="card shadow-sm">
+            <img src="imagenes/Catalogo/productos nuevos/llavero mini juego $15.000.jpg" class="poster" alt="Llavero Mini Juego">
+            <div class="card-body text-center">
+              <h5 class="card-title">Llavero Mini Juego</h5>
+               <p class="fw-bold text-primary">$15.000</p>
+              <center><button class="btn-agregar"
+        data-nombre="Llavero Mini Juego"
+        data-precio="15000"
+        data-imagen="imagenes/Catalogo/productos nuevos/llavero mini juego $15.000.jpg">
+        Agregar al carrito
+      </button></center> 
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- aqui va lo que tengas en promocion-->
+    <!-- PROMOCIONES -->
+<section id="promociones" class="my-5">
+  <h2 class="text-center mb-4">🎁 Promociones Especiales</h2>
+  <div class="row justify-content-center g-4">
+
+    <!-- Promoción 1 -->
+    <div class="col-md-4 col-sm-6">
+      <div class="card shadow-sm h-100 text-center">
+        <img src="imagenes/Catalogo/promo/mochila en perlas $125.000 (antes, $140.000) (material, perlas acrilicas).jpg" class="card-img-top" alt="Mochila en Perlas">
+        <div class="card-body">
+          <h5 class="card-title">Mochila en Perlas</h5>
+          <p class="card-text text-muted">Antes: <s>$140.000</s></p>
+          <p class="fw-bold text-primary">Ahora: $125.000</p>
+         <center><button class="btn-agregar"
+        data-nombre="Mochila en Perlas"
+        data-precio="125000"
+        data-imagen="imagenes/Catalogo/promo/mochila en perlas $125.000 (antes, $140.000) (material, perlas acrilicas).jpg">
+        Agregar al carrito
+      </button></center> 
+        </div>
+      </div>
+    </div>
+
+    <!-- Promoción 2 -->
+    <div class="col-md-4 col-sm-6">
+      <div class="card shadow-sm h-100 text-center">
+        <img src="imagenes/Catalogo/promo/par gafas sol $20.000 (antes $26.000).jpg" class="card-img-top" alt="Par de Gafas de Sol">
+        <div class="card-body">
+          <h5 class="card-title">Par de Gafas de Sol</h5>
+          <p class="card-text text-muted">Antes: <s>$26.000</s></p>
+          <p class="fw-bold text-primary">Ahora: $20.000</p>
+        <center><button class="btn-agregar"
+        data-nombre="Par de Gafas de Sol"
+        data-precio="20000"
+        data-imagen="imagenes/Catalogo/promo/par gafas sol $20.000 (antes $26.000).jpg">
+        Agregar al carrito
+      </button></center>
+        </div>
+      </div>
+    </div>
+
+    <!-- Promoción 3 -->
+    <div class="col-md-4 col-sm-6">
+      <div class="card shadow-sm h-100 text-center">
+        <img src="imagenes/Catalogo/promo/par manillas piedras naturales $30.000 (antes $36.000) (material, piedra lunar + piedra volcanica).jpg" class="card-img-top" alt="Par de Manillas de Piedras Naturales">
+        <div class="card-body">
+          <h5 class="card-title">Par de Manillas de Piedras Naturales</h5>
+          <p class="card-text text-muted">Antes: <s>$36.000</s></p>
+          <p class="fw-bold text-primary">Ahora: $30.000</p>
+        <center><button class="btn-agregar"
+        data-nombre="Par de Manillas de Piedras Naturales"
+        data-precio="30000"
+        data-imagen="imagenes/Catalogo/promo/par manillas piedras naturales $30.000 (antes $36.000) (material, piedra lunar + piedra volcanica).jpg">
+        Agregar al carrito
+      </button></center>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!--Nuestro equipo-->
+
+  <section id="equipo" class="my-5">
+   <h2 class="text-center mb-4" style="color:#0b4fa7;">Nuestro Equipo</h2>
+   <div class="row justify-content-center">
+    
+    <!-- Miembro 1 -->
+    <div class="col-md-4 text-center mb-4">
+      <div class="card p-4 shadow-sm border-0" style="border-radius:20px;">
+        <img src="imagenes/E-karime.jpeg" alt="Foto de Karime Gómez Vega" 
+             class="rounded-circle mb-3 mx-auto d-block border border-3 border-primary" 
+             style="width:150px; height:150px; object-fit:cover;">
+        <h5 class="fw-bold">Karime Gómez Vega</h5>
+        <p class="text-muted">Diseñadora de Accesorios</p>
+        <p>Apasionada por los colores, el arte y los detalles únicos. Cada accesorio refleja su amor por lo hecho a mano.</p>
+      </div>
+    </div>
+
+    <!-- Miembro 2 -->
+    <div class="col-md-4 text-center mb-4">
+      <div class="card p-4 shadow-sm border-0" style="border-radius:20px;">
+        <img src="imagenes/E-valeria.jpeg" alt="Foto de Luz Valeria Soto Gómez" 
+             class="rounded-circle mb-3 mx-auto d-block border border-3 border-primary" 
+             style="width:150px; height:150px; object-fit:cover;">
+        <h5 class="fw-bold">Luz Valeria Soto Gómez</h5>
+        <p class="text-muted">Gestora Creativa y Web</p>
+        <p>Diseña la presencia digital de Accesorios de Amor, combinando creatividad con funcionalidad en cada proyecto.</p>
+      </div>
+    </div>
+
+    <!-- Miembro 3 -->
+    <div class="col-md-4 text-center mb-4">
+      <div class="card p-4 shadow-sm border-0" style="border-radius:20px;">
+        <img src="imagenes/eliana.jpeg" alt="Foto de Eliana Verdeza Montes" 
+             class="rounded-circle mb-3 mx-auto d-block border border-3 border-primary" 
+             style="width:150px; height:150px; object-fit:cover;">
+        <h5 class="fw-bold">Eliana Verdeza Montes</h5>
+        <p class="text-muted">Asesora de Imagen</p>
+        <p>Encargada de conectar cada pieza con el estilo personal de nuestras clientas, resaltando su autenticidad.</p>
+      </div>
+    </div>
+   </div>
+</section>
+
+
+    <!-- CONTACTO -->
+  <section id="contacto" class="text-center my-5">
+  <h2>📞 Contáctanos</h2>
+
+  <p>
+    Email: <strong>accesorios.de.amor1@gmail.com</strong><br>
+    WhatsApp: <strong>+57 323-900-31-43</strong>
+  </p>
+
+  <div class="redes">
+
+    <!-- INSTAGRAM PRO -->
+    <a href="https://www.instagram.com/accesorios.de.amor1/" 
+       target="_blank" 
+       class="btn-instagram">
+       <i class="bi bi-instagram"></i>
+       <span>Instagram</span>
+    </a>
+
+
+  </div>
+</section>
+</main>
+   
+
+<!-- FOOTER -->
+<footer class="text-center p-3">
+© 2026 Accesorios de Amor
+</footer>
+
+<!-- ================= CHAT AUTOMÁTICO ================= -->
+<div id="chatButton" onclick="toggleChat()">💬</div>
+
+<div id="chatBox">
+    <div id="chatHeader">Asistente Virtual</div>
+    <div id="chatMessages"></div>
+    <input type="text" id="chatInput" placeholder="Escribe aquí..." onkeypress="handleKey(event)">
+</div>
+
+<!-- ================= WHATSAPP (ASESOR REAL) ================= -->
+<a href="https://wa.me/573239003143?text=Hola,%20quiero%20información"
+   target="_blank"
+   id="whatsappButton">
+   <i class="bi bi-whatsapp"></i>
+</a>
+
+<!-- ================= SCRIPTS ================= -->
+
+<script>
+/* ABRIR / CERRAR CHAT */
+function toggleChat() {
+    const chat = document.getElementById("chatBox");
+    chat.style.display = chat.style.display === "block" ? "none" : "block";
+}
+
+/* RESPUESTAS AUTOMÁTICAS */
+function handleKey(event) {
+    if (event.key === "Enter") {
+
+        const input = document.getElementById("chatInput");
+        const mensajes = document.getElementById("chatMessages");
+        const texto = input.value.toLowerCase();
+
+        if (texto.trim() === "") return;
+
+        // Mostrar mensaje del usuario
+        mensajes.innerHTML += `<div><b>Tú:</b> ${input.value}</div>`;
+
+        let respuesta = "No entendí muy bien 🤔, ¿puedes explicarlo de otra forma?";
+
+        // ===== SALUDOS =====
+        if (texto.includes("hola") || texto.includes("buenas") || texto.includes("hey")) {
+            respuesta = "Hola 👋 Bienvenida a Accesorios de Amor 💎 ¿Qué estás buscando hoy?";
+        }
+
+        // ===== DESPEDIDA =====
+        else if (texto.includes("adios") || texto.includes("chao")) {
+            respuesta = "Gracias por visitarnos 💕 ¡Te esperamos pronto!";
+        }
+
+        // ===== PRECIOS =====
+        else if (texto.includes("precio") || texto.includes("cuanto") || texto.includes("vale") || texto.includes("cuesta") || texto.includes("precios")) {
+            respuesta = "Tenemos productos desde $14.000 💰 hasta $125.000 dependiendo del diseño y material.";
+        }
+
+        // ===== PRODUCTOS =====
+        else if (texto.includes("productos") || texto.includes("venden") || texto.includes("tienen") || texto.includes("vendes")) {
+            respuesta = "Vendemos collares, manillas, aretes, anillos y llaveros ✨ todos nuestros productos los puedes ver en la sección de productos o en nuestro catálogo online.";
+        }
+
+        // ===== RECOMENDACIONES GENERALES =====
+        else if (texto.includes("recomienda") || texto.includes("sugerencia") || texto.includes("recomiendame") || texto.includes("sugiereme") || texto.includes("que me compro") || texto.includes("recomendacion")) {
+            respuesta = "Te recomiendo nuestros llaveros y manillas 💖 son los más vendidos y económicos.";
+        }
+
+        // ===== REGALOS =====
+        else if (texto.includes("regalo")) {
+            respuesta = "🎁 Para regalo te recomiendo manillas en pareja o accesorios personalizados 💕 quedan hermosos.";
+        }
+
+        // ===== MUJER =====
+        else if (texto.includes("mujer") || texto.includes("dama")) {
+            respuesta = "Tenemos accesorios elegantes y delicados 💎 perfectos para resaltar tu estilo.";
+        }
+
+        // ===== HOMBRE =====
+        else if (texto.includes("hombre")) {
+            respuesta = "Para hombres tenemos manillas en piedra volcánica 🔥 y diseños más sobrios.";
+        }
+
+        // ===== NIÑOS =====
+        else if (texto.includes("niño") || texto.includes("niña")) {
+            respuesta = "También tenemos accesorios divertidos para niños 🎨 como llaveros y colores llamativos.";
+        }
+
+        // ===== ENVÍOS =====
+        else if (texto.includes("envio") || texto.includes("domicilio") || texto.includes("entrega")) {
+            respuesta = "Hacemos envíos a toda Colombia 🚚 El costo depende de tu ciudad.";
+        }
+
+        // ===== TIEMPO DE ENTREGA =====
+        else if (texto.includes("tiempo") || texto.includes("demora")) {
+            respuesta = "El tiempo de entrega suele ser de 2 a 5 días hábiles 📦.";
+        }
+
+        // ===== PROMOCIONES =====
+        else if (texto.includes("promo") || texto.includes("oferta") || texto.includes("descuento")) {
+            respuesta = "🎁 Nuestras promociones puedes verlas en la sección de promociones de la pagina.";
+        }
+
+        // ===== CATÁLOGO =====
+        else if (texto.includes("catalogo")) {
+            respuesta = "Puedes ver todo nuestro catálogo en el menú 📖 o en la sección de productos.";
+        }
+
+        // ===== PERSONALIZADOS =====
+        else if (texto.includes("personalizado") || texto.includes("personalizar")) {
+            respuesta = "Sí 💕 hacemos productos personalizados según tu estilo, habla con una asesora.";
+        }
+
+        // ===== MATERIAL =====
+        else if (texto.includes("material")) {
+            respuesta = "Trabajamos con perlas acrílicas, piedras naturales y materiales de alta calidad ✨.";
+        }
+
+        // ===== PAGO =====
+        else if (texto.includes("pago") || texto.includes("pagar")) {
+            respuesta = "Puedes pagar por transferencia, Nequi, Daviplata o contra entrega 💳.";
+        }
+
+        // ===== UBICACIÓN =====
+        else if (texto.includes("donde") || texto.includes("ubicados")) {
+            respuesta = "Estamos en Colombia (Montería) y hacemos envíos a todo el país.";
+        }
+
+        // ===== HORARIO =====
+        else if (texto.includes("horario") || texto.includes("hora")) {
+            respuesta = "Atendemos todos los días 🕒 puedes escribirnos en cualquier momento.";
+        }
+
+        // ===== CONTACTO HUMANO =====
+        else if (texto.includes("asesor") || texto.includes("persona") || texto.includes("humano") || texto.includes("whatsapp") || texto.includes("asesora") ) {
+            respuesta = `
+            Puedes hablar con una asesora real aquí 👇<br><br>
+            <a href="https://wa.me/573239003143" target="_blank">
+            👉 Ir a WhatsApp 💬
+            </a>`;
+        }
+
+        // ===== AGRADECIMIENTO =====
+        else if (texto.includes("gracias")) {
+            respuesta = "Con mucho gusto 💕 estamos para ayudarte siempre.";
+        }
+
+        // ===== RESPUESTA FINAL =====
+        mensajes.innerHTML += `<div><b>Asistente:</b> ${respuesta}</div>`;
+
+        input.value = "";
+        mensajes.scrollTop = mensajes.scrollHeight;
+    }
+}
+
+
+/* EFECTO NAVBAR */
+window.addEventListener('scroll', function() {
+    const nav = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+    } else {
+        nav.classList.remove('scrolled');
+    }
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const botones = document.querySelectorAll(".btn-agregar");
+  const contador = document.getElementById("contador-carrito");
+
+  // 🔹 Actualizar contador al cargar
+  actualizarContador();
+
+  // 🔹 Evento botones
+  botones.forEach((btn) => {
+    btn.addEventListener("click", () => {
+
+      const nombre = btn.dataset.nombre;
+      const precio = parseFloat(btn.dataset.precio);
+      const imagen = btn.dataset.imagen;
+
+      let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+      const existente = carrito.find(p => p.nombre === nombre);
+
+      if (existente) {
+        existente.cantidad++;
+      } else {
+        carrito.push({ nombre, precio, imagen, cantidad: 1 });
+      }
+
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+
+      actualizarContador();
+    });
+  });
+
+  function actualizarContador() {
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const total = carrito.reduce((acc, p) => acc + p.cantidad, 0);
+    if (contador) contador.textContent = total;
+  }
+
+});
+</script>
+
+</body>
+</html>
